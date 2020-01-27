@@ -7,13 +7,29 @@ var buttonEl3 = document.getElementById("thirdOption");
 var buttonEl4 = document.getElementById("fourthOption");
 var answerIs = document.getElementById("answerCheck");
 var questionPool = {
-    "questions" : ["A","B","C","D"],
-    "option1" : ["Wow","Hello","Your"],
-    "option2" : ["Kobe","My","Name"],
-    "option3" : ["Is","Name","Is"],
-    "option4" : ["Dead","is Henry","?"],
+    "questions" : [
+        "What is 1 + 1?", //Question 0
+        "What's Kobe nickname?", 
+        "What does HTML stand for?",
+        "D"],
+    "option1" : [
+        "2", //Question 0 Option 1
+        "KB-24", 
+        "HyperText Modern Language"],
+    "option2" : [
+        "11", //Question 0 Option 2
+        "Purple Mamba", 
+        "HyperText Musical Language"],
+    "option3" : [
+        "undefined", //Question 0 Option 3
+        "Black Mamba", 
+        "Hmm...The...Mother...Language???"],
+    "option4" : [
+        "0",  //Question 0 Option 4
+        "Kobe", 
+        "HyperText Markup Language"], 
 }
-var answerKey = ["firstOption","firstOption","secondOption"]
+var answerKey = ["firstOption","thirdOption","fourthOption","fourthOption"];
 var initialCountdown = 100;
 var i = 0;
 var j = 0;
@@ -21,10 +37,17 @@ var score = 0;
 
 
 function startQuiz() {
-    
+    // if (i <= questionPool.length || initialCountdown == 0){
+    //     clearInterval(timerInterval);
+    //     document.getElementById("question").textContent = "Score: " + score;
+    //     buttonEl1.style.display = "none";
+    //     buttonEl2.style.display = "none";
+    //     buttonEl3.style.display = "none";
+    //     buttonEl4.style.display = "Start Over?";
+    // }else {
     var timerInterval = setInterval(function() {
         initialCountdown--;
-        quizTimer.textContent = initialCountdown + "seconds left"
+        quizTimer.textContent = initialCountdown + " seconds left"
         headerEl.style.display = "none";
         startEl.style.display = "none";
         document.getElementById("question").textContent = questionPool.questions[i];
@@ -32,7 +55,7 @@ function startQuiz() {
         document.getElementById("secondOption").textContent = questionPool.option2[i];
         document.getElementById("thirdOption").textContent = questionPool.option3[i];
         document.getElementById("fourthOption").textContent = questionPool.option4[i];
-    }, 1000);
+    }, 1000); //}
 }
 
 
@@ -48,19 +71,33 @@ function userClick() {
     console.log(i);
     var target = event.target.id;
     // console.log (target);
-    if (target == answerKey[j]) {
-        score = score + 10;
-        console.log(answerKey[j],score,target);
-        j++;
-        document.getElementById("answerCheck").textContent = "You are right!";
-
-    } else {
-        initialCountdown = initialCountdown - 10;
-        console.log(answerKey[j],initialCountdown);
-        j++;
-        document.getElementById("answerCheck").textContent = "You are wrong!";
+    // if (i == 4 || initalCountdown == 0) {
+    //     document.getElementById("question").textContent = "Score: " + score;
+    //     clearInterval(timerInterval);
+    //     buttonEl1.style.display = "none";
+    //     buttonEl2.style.display = "none";
+    //     buttonEl3.style.display = "none";
+    //     buttonEl4.style.display = "Start Over?";
         
-    }
+    // } else {
+            if (target == answerKey[j]) {
+                score = score + 10;
+                console.log(answerKey[j],score,target);
+                j++;
+                document.getElementById("answerCheck").textContent = "You are right!";
+                setTimeout(function(){
+                    document.getElementById("answerCheck").textContent = '';
+                }, 2000);
+            } else {
+                    initialCountdown = initialCountdown - 10;
+                    console.log(answerKey[j],initialCountdown);
+                    j++;
+                    document.getElementById("answerCheck").textContent = "You are wrong!";
+                    setTimeout(function(){
+                        document.getElementById("answerCheck").textContent = '';
+                    }, 2000);
+            }
+        
     console.log(j);
 }
 
