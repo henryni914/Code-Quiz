@@ -10,8 +10,7 @@ var questionPool = {
     "questions" : [
         "What is 1 + 1?", //Question 0
         "What's Kobe nickname?", 
-        "What does HTML stand for?",
-        "D"],
+        "What does HTML stand for?"],
     "option1" : [
         "2", //Question 0 Option 1
         "KB-24", 
@@ -27,8 +26,9 @@ var questionPool = {
     "option4" : [
         "0",  //Question 0 Option 4
         "Kobe", 
-        "HyperText Markup Language"], 
+        "HyperText Markup Language"]
 }
+console.log(questionPool.questions.length);
 var answerKey = ["firstOption","thirdOption","fourthOption","fourthOption"];
 var initialCountdown = 100;
 var i = 0;
@@ -45,7 +45,11 @@ function startQuiz() {
     //     buttonEl3.style.display = "none";
     //     buttonEl4.style.display = "Start Over?";
     // }else {
+    console.log(i);
     var timerInterval = setInterval(function() {
+        if (i >= questionPool.questions.length || initialCountdown == 0){
+            clearInterval(timerInterval);
+        }else {
         initialCountdown--;
         quizTimer.textContent = initialCountdown + " seconds left"
         headerEl.style.display = "none";
@@ -55,7 +59,7 @@ function startQuiz() {
         document.getElementById("secondOption").textContent = questionPool.option2[i];
         document.getElementById("thirdOption").textContent = questionPool.option3[i];
         document.getElementById("fourthOption").textContent = questionPool.option4[i];
-    }, 1000); //}
+    }}, 1000); //}
 }
 
 
@@ -82,7 +86,7 @@ function userClick() {
     // } else {
             if (target == answerKey[j]) {
                 score = score + 10;
-                console.log(answerKey[j],score,target);
+                console.log(answerKey[j],"Your score is: " + score,target);
                 j++;
                 document.getElementById("answerCheck").textContent = "You are right!";
                 setTimeout(function(){
