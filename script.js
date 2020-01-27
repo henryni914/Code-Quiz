@@ -41,8 +41,10 @@ function userClick() {
     document.getElementById("thirdOption").textContent = questionPool.option3[i];
     document.getElementById("fourthOption").textContent = questionPool.option4[i];
     console.log(i);
-//     document.write("This is working");
+    var target = event.target.id;
+    console.log (target);
 }
+
 
 
 
