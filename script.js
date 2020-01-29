@@ -10,6 +10,13 @@ var buttonEl3 = document.getElementById("thirdOption");
 var buttonEl4 = document.getElementById("fourthOption");
 var answerIs = document.getElementById("answerCheck");
 var endEl = document.getElementById("end");
+var submitForm = document.getElementById("score-form");
+var submitEl = document.getElementById("submitScore");
+var nameInput = document.getElementById("nameList");
+var restartEl = document.getElementById("startOver");
+var clearEl = document.getElementById("clearScores");
+var highList = document.getElementById("highScores");
+var scoreList = document.getElementById("listOfScores")
 
 // 
 var questionPool = {
@@ -50,6 +57,7 @@ var answerKey = ["firstOption", "thirdOption", "fourthOption", ""];
 var initialCountdown = 100;
 var i = 0;
 var j = 0;
+var k = 0;
 var score = 0;
 var userScores = [];
 var userNames = [];
@@ -72,7 +80,7 @@ function startQuiz() {
     buttonEl3.textContent = questionPool.option3[0];
     buttonEl4.textContent = questionPool.option4[0];
     var timerInterval = setInterval(function () {
-        initialCountdown--;   
+        initialCountdown--;
         quizTimer.textContent = initialCountdown + " seconds left";
         if (i >= questionPool.questions.length || initialCountdown == 0) {
             clearInterval(timerInterval);
@@ -80,10 +88,13 @@ function startQuiz() {
             quizTimer.textContent = "Score: " + initialCountdown;
             userScores.push(score);
             console.log(userScores);
-            storeScores();
-            score = "";
+            // storeInfo();
             console.log(score);
             endEl.style.display = "block";
+            restartEl.style.display = "none";
+            clearEl.style.display = "none";
+
+
         }
     }, 1000);
 }
@@ -102,7 +113,7 @@ function userClick() {
     console.log(i);
     var target = event.target.id;
     if (target == answerKey[j]) {
-        console.log("The answer is: " + answerKey[j],"You clicked: " + target);
+        console.log("The answer is: " + answerKey[j], "You clicked: " + target);
         j++;
         answerIs.textContent = "You are right!";
         setTimeout(function () {
@@ -121,25 +132,55 @@ function userClick() {
     console.log(j);
 }
 
-// function localScores() {
-//     for (let k = 0; i < userScores.length; i++);
-//     var localScore = userScores[k];
+local();
 
-//     var li = document.createElement("li");
-//     li.textContent = localScore;
+function localScores() { //renderTodos
+    userNames.textContent = "";
+    userScores.textContent = "";
+    for (let k = 0; k < userScores.length; k++) {
+        var localScore = userScores[k];
+        var localName = userNames[k];
 
-// }
+        var li = document.createElement("li");
+        li.textContent = localScore + " " + localName;
+        scoreList.appendChild(li);
 
-function storeScores() {
-    localStorage.setItem("scores",JSON.stringify(userScores))
+    }
+}
+function local() {
+    var storedScores = JSON.parse(localStorage.getItem("scores"));
+    var storedNames = JSON.parse(localStorage.getItem("names"));
+
+    if (storedScores !== null) {
+        userScores = storedScores;
+        userNames = storedNames;
+    }
+    localScores();
 }
 
-// function storeNames() {
-//     localStorage.setItem("names",JSON.stringify())
-// }
+function storeInfo() {
+    localStorage.setItem("scores", JSON.stringify(userScores));
+    localStorage.setItem("names", JSON.stringify(userNames));
+}
+
+function submit() {
+    event.preventDefault();
+    if (nameText === "") {
+        return;
+    }
+    var nameText = nameInput.value;
+    userNames.push(nameText);
+    // userScores.push(scoreText);
+    console.log(userNames, nameText);
+    nameInput.value = "";
+    storeInfo();
+    // localScores();
+
+};
 
 startEl.onclick = startQuiz;
 buttonEl1.onclick = userClick;
 buttonEl2.onclick = userClick;
 buttonEl3.onclick = userClick;
 buttonEl4.onclick = userClick;
+submitEl.onclick = submit;
