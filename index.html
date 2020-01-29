@@ -11,13 +11,6 @@
     <h1 id = header>Are you ready for a quiz?</h1>
     <h2 id = timer>Timer goes here</h2>
     <button id = start> Start </button>
-    <form>
-        <input type="text" placeholder="Name" id = nameList>
-        <button id = submitScore> Submit</button>
-    </form>     
-
-    <button id = startOver> Start Over</button>
-    <button id = clearScores> Clear High Scores</button>
     <div class = container>
         <h3 id = question>Questions appear here</h3>
         <ol id = answers>
@@ -27,6 +20,14 @@
             <li><button id = fourthOption>Option 4</button></li>
         </ol>
         <h4 id = answerCheck></h4>
+    </div>
+    <div id = end>
+        <form>
+            <input type="text" placeholder="Name" id = nameList>
+            <button id = submitScore> Submit</button>
+        </form>     
+        <button id = startOver> Start Over</button>
+        <button id = clearScores> Clear High Scores</button>
     </div>
 
     <script src="script.js"></script>

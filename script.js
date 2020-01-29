@@ -1,3 +1,4 @@
+// HTML elements 
 var headerEl = document.getElementById("header");
 var quizTimer = document.getElementById("timer");
 var startEl = document.getElementById("start");
@@ -8,6 +9,9 @@ var buttonEl2 = document.getElementById("secondOption");
 var buttonEl3 = document.getElementById("thirdOption");
 var buttonEl4 = document.getElementById("fourthOption");
 var answerIs = document.getElementById("answerCheck");
+var endEl = document.getElementById("end");
+
+// 
 var questionPool = {
     "questions": [
         "What is 1 + 1?", //Question 0
@@ -50,31 +54,36 @@ var score = 0;
 var userScores = [];
 var userNames = [];
 
-answerEl.style.visibility = "hidden";
-questionEl.style.visibility = "hidden";
+quizTimer.style.display = "none";
+answerEl.style.display = "none";
+questionEl.style.display = "none";
+endEl.style.display = "none";
 
 function startQuiz() {
     headerEl.style.display = "none";
     startEl.style.display = "none";
-    answerEl.style.visibility = "visible";
-    questionEl.style.visibility = "visible";
+    quizTimer.style.display = "block";
+    answerEl.style.display = "block";
+    questionEl.style.display = "block";
+    quizTimer.textContent = initialCountdown + " seconds left";
     questionEl.textContent = questionPool.questions[0];
     buttonEl1.textContent = questionPool.option1[0];
     buttonEl2.textContent = questionPool.option2[0];
     buttonEl3.textContent = questionPool.option3[0];
     buttonEl4.textContent = questionPool.option4[0];
     var timerInterval = setInterval(function () {
-        initialCountdown--;
+        initialCountdown--;   
         quizTimer.textContent = initialCountdown + " seconds left";
         if (i >= questionPool.questions.length || initialCountdown == 0) {
             clearInterval(timerInterval);
-            questionEl.textContent = "Score: " + score;
-            questionEl.style.visibility = "visible";
+            score = initialCountdown;
+            quizTimer.textContent = "Score: " + initialCountdown;
             userScores.push(score);
             console.log(userScores);
             storeScores();
             score = "";
             console.log(score);
+            endEl.style.display = "block";
         }
     }, 1000);
 }
@@ -82,7 +91,7 @@ function startQuiz() {
 function userClick() {
     i++;
     if (i >= questionPool.questions.length || initialCountdown == 0) {
-        answerEl.style.visibility = "hidden";
+        answerEl.style.display = "none";
         //replace this with a new button (don't use buttonEl1) that is hidden until quiz is over that can restart the quiz
     }
     questionEl.textContent = questionPool.questions[i];
@@ -93,8 +102,7 @@ function userClick() {
     console.log(i);
     var target = event.target.id;
     if (target == answerKey[j]) {
-        score = score + 10;
-        console.log("The answer is: " + answerKey[j], "Your score is: " + score, "You clicked: " + target);
+        console.log("The answer is: " + answerKey[j],"You clicked: " + target);
         j++;
         answerIs.textContent = "You are right!";
         setTimeout(function () {
@@ -135,6 +143,3 @@ buttonEl1.onclick = userClick;
 buttonEl2.onclick = userClick;
 buttonEl3.onclick = userClick;
 buttonEl4.onclick = userClick;
-
-
-
