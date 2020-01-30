@@ -1,6 +1,56 @@
 button {
-    padding: 10px;
-    margin: 20px;
-    cursor: pointer;
-    font-size: 20px;
-  }
+  padding: 10px;
+  margin: 20px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#header {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#start {
+  margin: 0 auto;
+  margin-top: 20px;
+  text-align: center;
+}
+
+#timer {
+  text-align: center;
+}
+
+.container,
+#question {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#answers {
+  list-style-type: none;
+  text-align: left;
+  margin-left: 400px;
+}
+
+#score-form ,
+#submitScore{
+  margin: 0 auto;
+  text-align: center;
+}
+
+#submitScore{
+  margin-top: 15px;
+}
+
+#highScores {
+  margin-left: 590px;
+}
+
+#startOver{
+  margin: 0 auto;
+  text-align: center;
+  margin-left: 580px;
+}
+#clearScores{
+  margin-left: 540px;
+}
